@@ -31,60 +31,78 @@ public class mealReceipt {
 		
 		Double totalBeforeTax = appetizerPriceNum + entréePriceNum + dessertPriceNum; //Find total
 		Double tipMultiply = tipNum * totalBeforeTax;
-		Double totalAfterTaxPlusTip = totalBeforeTax * 1.06 + tipMultiply; 
+		Double taxAmountNum = 0.06;
+		Double taxOfMealNum = taxAmountNum * totalBeforeTax;
+		Double totalAfterTaxPlusTip = totalBeforeTax * (1 + taxAmountNum) + tipMultiply; 
 		//Rounding
-		long totalLong = Math.round(totalAfterTaxPlusTip*100);
+		int totalInt = (int) Math.round(totalAfterTaxPlusTip*100);
+		int dessertRoundInt = (int) Math.round(dessertPriceNum*100);
+		int entréeRoundInt = (int) Math.round(entréePriceNum*100);
+		int appetizerRoundInt = (int) Math.round(appetizerPriceNum*100);
+		int totalBeforeTaxRoundInt = (int) Math.round(totalBeforeTax*100);
+		int taxOfMealInt = (int) Math.round(taxOfMealNum*100);
+		int tipMultiplyNum = (int) Math.round(tipMultiply*100);
 		
-		long dessertRoundLong = Math.round(dessertPriceNum*100);
-		long entréeRoundLong = Math.round(entréePriceNum*100);
-		long appetizerRoundLong = Math.round(appetizerPriceNum*100);
-		long totalBeforeTaxRoundLong = Math.round(totalBeforeTax*100);
+		double totalDouble = totalInt;
+		double dessertRoundDouble = dessertRoundInt;
+		double entréeRoundDouble = entréeRoundInt;
+		double appetizerRoundDouble = appetizerRoundInt;
+		double totalBeforeTaxRoundDouble = totalBeforeTaxRoundInt;
+		double taxOfMealDouble = taxOfMealInt;
+		double tipMultiplyDouble = tipMultiplyNum;
 		
-		String a = totalLong/100 + "";
+		totalDouble /= 100;
+		dessertRoundDouble /= 100;
+		entréeRoundDouble /= 100;
+		appetizerRoundDouble /= 100;
+		totalBeforeTaxRoundDouble /= 100;	
+		taxOfMealDouble /= 100;
+		tipMultiplyDouble /= 100;
 		
-		String c = dessertRoundLong/100 + "";
-		String d = entréeRoundLong/100 + "";//Mess with this to change decimle points
-		String e = appetizerRoundLong/100 + "";
-		String f = totalBeforeTaxRoundLong/100 + "";
+		String a = totalDouble + "";
+		String c = dessertRoundDouble + "";
+		String d = entréeRoundDouble + "";//Mess with this to change decimle points
+		String e = appetizerRoundDouble + "";
+		String f = totalBeforeTaxRoundDouble + "";
+		String g = taxOfMealDouble + "";
+		String h = tipMultiplyDouble + "";
 		
 		appetizerPriceNum = Double.parseDouble(e);
 		entréePriceNum = Double.parseDouble(d);
 		dessertPriceNum = Double.parseDouble(c);
-		
+		taxOfMealNum = Double.parseDouble(g);
 		totalAfterTaxPlusTip = Double.parseDouble(a);
-		double totalBeforeTaxRound = Double.parseDouble(f);
+		totalBeforeTax = Double.parseDouble(f);
+		tipMultiply = Double.parseDouble(h);
 		
-		String item = "item:";
+		String item = "Item:";
 		String subtotal = "Subtotal:";
 		String taxstr = "Tax:";
-		String tiper = ("Tip @ " + tipNum + "%");
+		String tiper = ("Tip @ " + tipNum + "%:");
 		String totalstr = "Total:";
 		
-		System.out.printf("%10s\t", item);
+		System.out.printf("%14s\t", item);
 		System.out.println("Price");
 		
-		System.out.printf("%10s\t", appetizerName);
+		System.out.printf("%14s\t", appetizerName);
 		System.out.println("$" + appetizerPriceNum);
 		
-		System.out.printf("%10s\t", entréeName);
+		System.out.printf("%14s\t", entréeName);
 		System.out.println("$" + entréePriceNum);
 		
-		System.out.printf("%10s\t", appetizerName);
-		System.out.println("$" + appetizerPriceNum);
-		
-		System.out.printf("%10s\t", dessertName);
+		System.out.printf("%14s\t", dessertName);
 		System.out.println("$" + dessertPriceNum);
 		
-		System.out.printf("%10s\t", subtotal);
-		System.out.println("$" + totalBeforeTaxRound);
+		System.out.printf("%14s\t", subtotal);
+		System.out.println("$" + totalBeforeTaxRoundDouble);
 		
-		System.out.printf("%10s\t", taxstr); //Tax 
-		System.out.println("$" + (totalBeforeTax * 0.06));
+		System.out.printf("%14s\t", taxstr); //Tax 
+		System.out.println("$" + (taxOfMealNum));
 		
-		System.out.printf("%10s\t", tiper); //Tip
-		System.out.println("$" + (tipNum * totalBeforeTaxRound));
+		System.out.printf("%14s\t", tiper); //Tip
+		System.out.println("$" + (tipMultiply));
 		
-		System.out.printf("%10s\t", totalstr); // Total
+		System.out.printf("%14s\t", totalstr); // Total
 		System.out.println("$" + totalAfterTaxPlusTip);
 		
 		
